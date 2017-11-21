@@ -1,0 +1,50 @@
+{% extends "formEntry/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1><a href="/">Nordstrom Technology Projects</a></h1>
+</div>
+<table class="table">
+{% for project in Projects %}
+        <tr>
+            <td>
+                <p><b>Goal Number:</b> {{ project.goal }}</p>
+                <p><b>Goal Name:</b> {{ project.name }}</p>
+            </td>
+            {% if project.projectStatus == "red" %}
+                <td class="danger">
+                <p><b>Project Status:</b> {{ project.projectStatus }}</p>
+                </td>
+            {% elif project.projectStatus == "yellow" %}
+                <td class="warning">
+                <p><b>Project Status:</b> {{ project.projectStatus }}</p>
+                </td>
+            {% else %}
+                <td class="success">
+                <p><b>Project Status:</b> {{ project.projectStatus }}</p>
+                </td>
+            {% endif %}
+            <td>
+                <p><b>Owner (Director):</b> {{ project.owner }}</p>
+                <p><b>Owning Group:</b> {{ project.group }}</p>
+            </td>
+            <td>
+                <p><b>Description:</b> {{ project.description }}</p>
+            </td>
+            <td>
+                <p><b>Start Date:</b> {{ project.startDate }}</p>
+                <p><b>Due Date:</b> {{ project.dueDate }}</p>
+                <p><b>Revised Due Date:</b> {{ project.revisedDueDate }}</p>
+                <p><b>Did Not Meet Date:</b> {{ project.didNotMeetDate }}</p>
+            </td>
+            <td>
+                <p><b>Executive Summary:</b> {{ project.executiveSummary }}</p>
+            </td>
+            <td>
+                <p><b>Link to Metrics:</b> {{ project.linkToMetrics }}</p>
+            </td>
+        </tr>
+{% endfor %}
+</table>
+
+{% endblock  %}

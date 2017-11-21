@@ -1,0 +1,21 @@
+h1 a {
+    color:#FCA205;
+}
+
+tr[data-project-id] tr {
+    cursor: pointer;
+}
+tr[data-project-id]:hover tr {
+    background-color: #CCC;
+}
+body > .content {
+    margin: 0 auto;
+    width: 90%;
+}
+body.index .table td {
+    border-right: 1px solid #CCC;
+    border-top: none;
+}
+body.index .table td:last-child {
+    border-right: none;
+}

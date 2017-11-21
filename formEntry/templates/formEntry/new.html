@@ -1,0 +1,12 @@
+{%  extends 'formEntry/base.html' %}
+
+{%  block content  %}
+    <button type="submit" class="save btn btn-default">Save</button>
+    <h1>New Project</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{%  endblock %}

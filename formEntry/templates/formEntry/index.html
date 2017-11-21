@@ -1,0 +1,83 @@
+{% extends "formEntry/base.html" %}
+{%  load staticfiles %}
+
+{% block page_name %}index{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><a href="/">Nordstrom Technology Projects</a></h1>
+    <a href="{% url 'project_new' %}" class="top-menu"><button type="button" class="btn btn-outline-secondary">New Project</button></a>
+</div>
+<form method="POST" class="post-form form-inline">
+    {% csrf_token %}
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" placeholder="Search" name="search" value="{{ searchterm }}">
+            <button type="submit" class="save btn btn-default input-group-addon">Search</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" placeholder="Filter" name="filter" value="{{ filterterm }}">
+            <button type="submit" class="save btn btn-default input-group-addon">Filter</button>
+        </div>
+    </div>
+</form>
+<br/><br/>
+<table class="col-xs-12">
+    {% for project in Projects %}
+            <tr data-project-id="{{ project.projectRecordID }}">
+                <td>
+                    <table class="table">
+                        <tr class="{% if project.projectStatus.lower == "red" %}danger
+                            {% elif project.projectStatus.lower == "yellow" %}warning
+                            {% else %}success{% endif %}">
+                            <td class="col-xs-1 col-md-1">
+                                <p><b>Number:</b> {{ project.goal }}</p>
+                                <p><b>Name:</b></br>{{ project.name }}</p>
+    {#                            <p><b>Status:</b> {{ project.projectStatus }}</p>#}
+                            </td>
+                            <td class="col-xs-1 col-md-1">
+                                <p><b>Director:</b></br> {{ project.owner }}</p>
+                                <p><b>Group:</b></br> {{ project.group }}</p>
+                            </td>
+                            <td class="col-xs-8 col-md-8">
+                                <p><b>Description:</b></br> {{ project.description|truncatewords:10 }}</p>
+                                <p><b>Summary:</b></br> {{ project.executiveSummary|truncatewords:10 }}</p>
+                            </td>
+                            <td class="hidden-sm hidden-xs col-xs-2 col-md-2">
+                                <p><a href="{{ project.linkToMetrics }}">Metrics</a></p>
+                            </td>
+                        </tr>
+                        <tr class="{% if project.projectStatus.lower == "red" %}danger
+                            {% elif project.projectStatus.lower == "yellow" %}warning
+                            {% else %}success{% endif %}">
+                            <td class="col-xs-1 col-md-1">
+                                <p><b>Start:</b></br> {{ project.startDate }}</p>
+                            </td>
+                            <td class="col-xs-3 col-md-1">
+                                <p><b>Due:</b><br> {{ project.dueDate }}</p>
+                            </td>
+                            <td class="col-xs-8">
+                                <p><b>Revised Due:</b></br> {{ project.revisedDueDate }}</p>
+                            </td>
+                            <td colspan="2" class="col-xs-2">
+                                <p><b>Missed Date:</b></br> {{ project.didNotMeetDate }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+    {% endfor %}
+</table>
+<script type="text/javascript">
+$('tr[data-project-id]').click(function (e) {
+    if (e.target.tagName != 'A') {
+        window.location = '/project/detail/' + $(this).data('project-id');
+    }
+});
+
+</script>
+
+
+{% endblock  %}
