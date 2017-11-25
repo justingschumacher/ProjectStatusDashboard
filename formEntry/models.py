@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from simple_history.models import HistoricalRecords
+# from simple_history.models import HistoricalRecords
 
 
 # Create your models here.
@@ -40,6 +40,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.goal
+
 
 class ProjectStatusIndicator(models.Model):
     projectStatusIndicator = models.BooleanField('Project Status: ')
