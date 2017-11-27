@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from .models import Project
-from .forms import ProjectForm, ProjectStatusRadio
+from .forms import ProjectForm, EditProjectForm
 
 
 # Create your views here.
