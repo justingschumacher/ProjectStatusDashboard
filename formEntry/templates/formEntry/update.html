@@ -1,0 +1,18 @@
+{%  extends 'formEntry/base.html' %}
+{%  load staticfiles %}
+
+{%  block content  %}
+
+<h4>Update Project</h4>
+<table class="col-xs-12">
+    <form action="" method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+
+        <tr data-project-id="{{ project.projectRecordID }}">
+
+        </tr>
+    </form>
+</table>
+{% endblock %}

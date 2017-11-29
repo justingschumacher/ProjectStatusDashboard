@@ -1,7 +1,14 @@
-{%  extends 'formEntry/base.html' %}
+{% extends "formEntry/base.html" %}
+{%  load staticfiles %}
 
+{% block page_name %}index{% endblock %}
+
+<div class="page-header">
+    <h1><a href="/">Nordstrom Technology Projects</a></h1>
+    <a href="{% url 'project_new' %}" class="top-menu">
+        <button type="button" class="btn btn-outline-secondary">New Project</button></a>
+</div>
 {%  block content  %}
-    <button type="submit" class="save btn btn-default">Save</button>
     <h1>New Project</h1>
     <form method="POST" class="post-form">
         {% csrf_token %}

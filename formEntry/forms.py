@@ -1,6 +1,5 @@
 from django import forms
 from .models import Project
-from django.utils import timezone
 from simple_history.models import HistoricalRecords
 
 class ProjectForm(forms.ModelForm):
