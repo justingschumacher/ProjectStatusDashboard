@@ -1,5 +1,5 @@
 h1 a {
-    color:#FCA205;
+    color:#666699;
 }
 
 body.index tr {
@@ -8,7 +8,7 @@ body.index tr {
 
 body > .content {
     margin: 0 auto;
-    width: 90%;
+    width: 99%;
 }
 body.index .table td {
     border-right: 1px solid #CCC;
@@ -17,3 +17,4 @@ body.index .table td {
 body.index .table td:last-child {
     border-right: none;
 }
+

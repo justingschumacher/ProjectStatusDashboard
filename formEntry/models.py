@@ -8,13 +8,20 @@ from simple_history.models import HistoricalRecords
 
 class Project(models.Model):
 
-    PROJECT_STATUS_CHOICES = (('Red', 'Red'), ('Yellow', 'Yellow'), ('Green', 'Green'))
-
+    PROJECT_STATUS_CHOICES = (('Red', 'Red'),
+                              ('Yellow', 'Yellow'),
+                              ('Green', 'Green'))
+    PROJECT_COMPLETION_STATUS_CHOICES = (('Not Started', 'Not Started'),
+                                         ('In Progress', 'In Progress'),
+                                         ('Completed', 'Completed'),
+                                         ('Cancelled', 'Cancelled'))
 
     projectRecordID = models.AutoField(primary_key=True, verbose_name="Number: ")
     goal = models.IntegerField(unique=True)
     owner = models.CharField(blank=True, null=True, max_length=128)
     group = models.CharField(blank=True, null=True, max_length=128)
+    projectCompletionStatus = models.CharField(max_length=16, default="Not Started",
+                                               choices=PROJECT_COMPLETION_STATUS_CHOICES)
     restrictedStatus = models.CharField(blank=True, null=True, max_length=128)
     startDate = models.DateField()
     dueDate = models.DateField()

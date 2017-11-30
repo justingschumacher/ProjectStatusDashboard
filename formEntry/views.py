@@ -12,6 +12,37 @@ from .forms import ProjectForm
 
 # Create your views here.
 
+class ProjectIndexView(ListView):
+
+    model = Project
+
+    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'projectCompletionStatus', 'linkToMetrics', 'deck', 'name',
+              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
+
+    template_name = 'formEntry/project_index.html'
+
+    success_url = reverse_lazy('index')
+    def indexpage(self):
+        projects = Project.objects.filter(startDate__lte=timezone.now()).order_by('dueDate')
+        searchterm = ''
+        filterterm = ''
+        if request.POST and request.POST.get('search'):
+            searchterm = request.POST.get('search').lower()
+            projects = projects.filter(Q(group__icontains=searchterm) |
+                                       Q(name__icontains=searchterm) |
+                                       Q(projectStatus__icontains=searchterm) |
+                                       Q(goal__icontains=searchterm) |
+                                       Q(owner__icontains=searchterm)
+                                       )
+        if request.POST and request.POST.get('filter'):
+            filterterm = request.POST.get('filter').lower()
+            projects = projects.filter(Q(group__icontains=filterterm) |
+                                       Q(name__icontains=filterterm) |
+                                       Q(projectStatus__icontains=filterterm) |
+                                       Q(goal__icontains=filterterm) |
+                                       Q(owner__icontains=filterterm)
+                                       )
 
 def index(request):
     projects = Project.objects.filter(startDate__lte=timezone.now()).order_by('dueDate')
@@ -33,7 +64,7 @@ def index(request):
                                    Q(goal__icontains=filterterm) |
                                    Q(owner__icontains=filterterm)
                                    )
-    return render(request, 'formEntry/index.html', {'Projects': projects, 'searchterm': searchterm})
+    return render(request, 'formEntry/project_index.html', {'Projects': projects, 'searchterm': searchterm})
 
 
 class ProjectNewView(CreateView):
@@ -41,10 +72,12 @@ class ProjectNewView(CreateView):
     model = Project
 
     fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'projectCompletionStatus', 'linkToMetrics', 'deck', 'name',
               'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
 
     template_name = 'formEntry/project_new.html'
+
+    success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
         context = super(ProjectNewView, self).get_context_data(**kwargs)
@@ -57,7 +90,7 @@ class ProjectUpdateView(UpdateView):
     model = Project
 
     fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'projectCompletionStatus', 'linkToMetrics', 'deck', 'name',
               'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
 
     template_name = 'formEntry/project_update.html'
@@ -76,10 +109,12 @@ class ProjectDetailView(DetailView):
     model = Project
 
     fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'projectCompletionStatus', 'linkToMetrics', 'deck', 'name',
               'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
 
     template_name = 'formEntry/project_detail.html'
+
+    success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
@@ -93,7 +128,7 @@ class ProjectDeleteView(DeleteView):
     model = Project
 
     fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'projectCompletionStatus', 'linkToMetrics', 'deck', 'name',
               'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
 
     template_name = 'formEntry/project_delete.html'
@@ -109,27 +144,6 @@ class ProjectDeleteView(DeleteView):
         return render(request, template_name, {'form': form})
 
 
-#
-
-
-# class ProjectEdit(UpdateView):
-#
-#     model = Project
-#     fields = [
-#         'goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-#         'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
-#         'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate'
-#     ]
-#     template_name = 'formEntry/edit.html'
-
-# class ProjectUpdate(UpdateView):
-#     model = Project
-#     success_url = reverse_lazy('project_list')
-#     fields = [
-#         'goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-#         'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
-#         'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate'
-#     ]
 
 
 # form based views (instead of class based views)
