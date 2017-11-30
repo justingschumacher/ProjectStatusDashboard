@@ -6,8 +6,10 @@
 {% block content %}
 <div class="page-header">
     <h1><a href="/">Nordstrom Technology Projects</a></h1>
-    <a href="{% url 'project_new' %}" class="top-menu">
-    <button type="button" class="btn btn-outline-light">New Project</button></a>
+    <div class="container-fluid">
+        <a href="{% url 'project_new' %}" class="top-menu">
+        <button type="button" class="btn btn-outline-dark">New Project</button></a>
+    </div>
 </div>
 <form method="POST" class="post-form form-inline">
     {% csrf_token %}
