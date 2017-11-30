@@ -2,12 +2,10 @@ h1 a {
     color:#FCA205;
 }
 
-/*tr[data-project-id] tr {*/
-    /*cursor: pointer;*/
-/*}*/
-/*tr[data-project-id]:hover tr {*/
-    /*background-color: #CCC;*/
-/*}*/
+body.index tr {
+    cursor: pointer;
+}
+
 body > .content {
     margin: 0 auto;
     width: 90%;

@@ -15,7 +15,7 @@ PROJECT_STATUS_CHOICES = ('Red', 'Yellow', 'Green')
 
 
 class EditProjectForm(forms.Form):
-    success_url = '/'
+    success_url = '/formEntry/index.html'
 
     goal = forms.IntegerField()
     owner = forms.CharField(strip=True, max_length=128)

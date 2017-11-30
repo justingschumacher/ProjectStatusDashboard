@@ -36,36 +36,38 @@ def index(request):
     return render(request, 'formEntry/index.html', {'Projects': projects, 'searchterm': searchterm})
 
 
-def project_new(request):
-    if request.method == "POST":
-        form = ProjectForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = ProjectForm()
+class ProjectNewView(CreateView):
 
-    return render(request, 'formEntry/new.html', {'form': form})
+    model = Project
 
+    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
 
-# def project_new(request, pk, template_name='formEntry/new.html'):
-#     #form = ProjectForm(request.POST or None)
-#     projectRecordID = get_object_or_404(Project, pk=pk)
-#     form = ProjectForm(request.POST or None, instance=projectRecordID)
-#     if form.is_valid():
-#         form.save()
-#         return redirect('formEntry/index.html')
-#     return render(request, template_name, {'form', form})
+    template_name = 'formEntry/project_new.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectNewView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 
-def project_update(request, pk, template_name='formEntry/update.html'):
-    projectRecordID = get_object_or_404(Project, pk=pk)
-    form = ProjectForm(request.POST or None, instance=projectRecordID)
-    if form.is_valid():
-        form.save()
-        return redirect('formEntry/index.html')
-    return render(request, template_name, {'form': form})
+class ProjectUpdateView(UpdateView):
+
+    model = Project
+
+    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
+
+    template_name = 'formEntry/project_update.html'
+
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectUpdateView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 
 
@@ -73,18 +75,41 @@ class ProjectDetailView(DetailView):
 
     model = Project
 
+    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
+
+    template_name = 'formEntry/project_detail.html'
+
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
 
-def project_delete(request, pk, template_name='formEntry/delete.html'):
-    projectRecordID = get_object_or_404(Project, pk=pk)
-    form = ProjectForm(request.POST or None, instance=projectRecordID)
-    if request.method == 'POST':
-        form.delete()
-        return redirect('formEntry/index.html')
-    return render(request, template_name, {'form': form})
+
+
+class ProjectDeleteView(DeleteView):
+
+    model = Project
+
+    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate')
+
+    template_name = 'formEntry/project_delete.html'
+
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        projectRecordID = get_object_or_404(Project, pk=pk)
+        form = ProjectForm(request.POST or None, instance=projectRecordID)
+        if request.method == 'POST':
+            form.delete()
+            return redirect('formEntry/index.html')
+        return render(request, template_name, {'form': form})
+
+
+#
 
 
 # class ProjectEdit(UpdateView):
@@ -96,10 +121,7 @@ def project_delete(request, pk, template_name='formEntry/delete.html'):
 #         'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate'
 #     ]
 #     template_name = 'formEntry/edit.html'
-# def detail(request):
-#     projects = Project.objects.filter(startDate__lte=timezone.now()).order_by('dueDate')
-#
-#     return render(request, 'formEntry/index.html')
+
 # class ProjectUpdate(UpdateView):
 #     model = Project
 #     success_url = reverse_lazy('project_list')
@@ -111,3 +133,45 @@ def project_delete(request, pk, template_name='formEntry/delete.html'):
 
 
 # form based views (instead of class based views)
+
+
+# def project_new(request):
+#     if request.method == "POST":
+#         form = ProjectForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.save()
+#             return HttpResponseRedirect('/')
+#     else:
+#         form = ProjectForm()
+#
+#     return render(request, 'formEntry/new.html', {'form': form})
+# def project_new(request, pk, template_name='formEntry/new.html'):
+#     form = ProjectForm(request.POST or None)
+#     projectRecordID = get_object_or_404(Project, pk=pk)
+#     form = ProjectForm(request.POST or None, instance=projectRecordID)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('formEntry/index.html')
+#     return render(request, template_name, {'form', form})
+# def detail(request):
+#     projects = Project.objects.filter(startDate__lte=timezone.now()).order_by('dueDate')
+#
+#     return render(request, 'formEntry/index.html')
+#
+#
+# def project_update(request, pk, template_name='formEntry/update.html'):
+#     projectRecordID = get_object_or_404(Project, pk=pk)
+#     form = ProjectForm(request.POST or None, instance=projectRecordID)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('formEntry/index.html')
+#     return render(request, template_name, {'form': form})
+#
+# def project_delete(request, pk, template_name='formEntry/delete.html'):
+#     projectRecordID = get_object_or_404(Project, pk=pk)
+#     form = ProjectForm(request.POST or None, instance=projectRecordID)
+#     if request.method == 'POST':
+#         form.delete()
+#         return redirect('formEntry/index.html')
+#     return render(request, template_name, {'form': form})
