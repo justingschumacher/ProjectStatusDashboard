@@ -103,7 +103,6 @@ class ProjectUpdateView(UpdateView):
         return context
 
 
-
 class ProjectDetailView(DetailView):
 
     model = Project
