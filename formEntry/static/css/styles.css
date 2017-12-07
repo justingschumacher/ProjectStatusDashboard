@@ -17,6 +17,8 @@ body.index .table td {
 body.index .table td:last-child {
     border-right: none;
 }
+body.project_update thead {
+    background-color: #CCCCCC;
 
 #logo {
   float: left;
