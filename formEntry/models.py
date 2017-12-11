@@ -14,6 +14,7 @@ class Project(models.Model):
     PROJECT_COMPLETION_STATUS_CHOICES = (('Not Started', 'Not Started'),
                                          ('In Progress', 'In Progress'),
                                          ('Completed', 'Completed'),
+                                         ('On Hold', 'On Hold'),
                                          ('Cancelled', 'Cancelled'))
 
     projectRecordID = models.AutoField(primary_key=True, verbose_name="Number: ")
@@ -47,9 +48,8 @@ class Project(models.Model):
     goalType = models.CharField(blank=True, null=True, max_length=256)
     history = HistoricalRecords()
 
-    # def get_absolute_url(self):
-    #     return reverse('project_update', kwargs={'pk': self.pk})
-    #     return
+    def get_absolute_url(self):
+        return reverse('project_update', kwargs={'pk': self.pk})
 
     def publish(self):
         self.published_date = timezone.now()
