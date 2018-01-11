@@ -20,3 +20,7 @@ tests/report/
 .idea/*
 settings.py
 .DS_Store
+projectstatusdashboard/
+templates/admin
+manage.py
+
