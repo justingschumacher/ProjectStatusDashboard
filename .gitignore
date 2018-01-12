@@ -27,3 +27,5 @@ projectstatusdashboard_env/
 static/admin
 formEntry/migrations
 *.pid
+*_env/
+goaldashboard/
