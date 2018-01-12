@@ -75,6 +75,24 @@
                                                                value="{{object.linkToMetrics}}">
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <label for="executiveSummary" class="col-sm-2
+                                                    col-form-label">Executive Summary: </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control form-control-sm"
+                                                               type="text" placeholder="required"
+                                                               value="{{object.executiveSummary}}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="pathToGreen" class="col-sm-2
+                                                    col-form-label">Path to Green: </label>
+                                                    <div class="col-sm-10">
+                                                    <input class="form-control form-control-sm"
+                                                           type="text" placeholder=""
+                                                           value="{{object.pathToGreen}}">
+                                                    </div>
+                                                </div>
                                             </form>
                                         </td>
                                     </tr>
@@ -163,6 +181,15 @@
                                                                        value="{{object.editDate}}" readonly>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label for="comments" class="col-sm-6
+                                                            col-form-label">Comments: </label>
+                                                            <div class="col-sm-6">
+                                                                <input class="form-control form-control-sm"
+                                                                       type="text" placeholder=""
+                                                                       value="{{object.comments}}">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                </div>
                                            </form>
@@ -172,72 +199,6 @@
                             </table>
                         </div>
                     </td>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="fieldWrapper">
-                        <table id="definitiontable" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Definition and Comments</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <form>
-                                            <div class="form-group row">
-                                                <label for="description" class="col-sm-1
-                                                col-form-label">Description: </label>
-                                                <div class="col-sm-11">
-                                                    <input class="form-control form-control-sm"
-                                                           type="text" placeholder="required"
-                                                           value="{{object.description}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="comments" class="col-sm-1
-                                                col-form-label">Comments: </label>
-                                                <div class="col-sm-11">
-                                                    <input class="form-control form-control-sm"
-                                                           type="text" placeholder="required"
-                                                           value="{{object.comments}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="executiveSummary" class="col-sm-1
-                                                col-form-label">Executive Summary: </label>
-                                                <div class="col-sm-11">
-                                                    <input class="form-control form-control-sm"
-                                                           type="text" placeholder="required"
-                                                           value="{{object.executiveSummary}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="pathToGreen" class="col-sm-1
-                                                col-form-label">Path to Green: </label>
-                                                <div class="col-sm-11">
-                                                <input class="form-control form-control-sm"
-                                                       type="text" placeholder="required"
-                                                       value="{{object.pathToGreen}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="definition" class="col-sm-1
-                                                col-form-label">Definition: </label>
-                                                <div class="col-sm-11">
-                                                    <input class="form-control form-control-sm"
-                                                           type="text" placeholder="required"
-                                                           value="{{object.definition}}">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -285,7 +246,7 @@
                         <table id="inputgoalstable" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Input Goals</th>
+                                    <th scope="col">Goals</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -301,27 +262,6 @@
                                                            value="{{object.inputGoals}}">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="fieldWrapper">
-                        <table id="outputgoalstable" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Output Goals</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <form>
                                             <div class="form-group row">
                                                 <label for="outputGoals" class="col-sm-1
                                                 col-form-label">Output Goals: </label>

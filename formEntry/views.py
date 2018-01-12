@@ -27,7 +27,7 @@ class ProjectIndexView(DetailView):
     success_url = reverse_lazy('project_index')
 
     def get(self, request, *args, **kwargs):
-        projects = Project.objects.filter(startDate__lte=timezone.now()).order_by('dueDate')
+        projects = Project.objects.order_by('dueDate')
         searchterm = ''
         filterterm = ''
         if request.POST and request.POST.get('search'):
@@ -50,7 +50,7 @@ class ProjectIndexView(DetailView):
 
 
 def index(request):
-    projects = Project.objects.filter(startDate__lte=timezone.now()).order_by('dueDate')
+    projects = Project.objects.order_by('dueDate')
     searchterm = ''
     filterterm = ''
     if request.POST and request.POST.get('search'):
@@ -69,7 +69,10 @@ def index(request):
                                    Q(goal__icontains=filterterm) |
                                    Q(owner__icontains=filterterm)
                                    )
-    return render(request, 'formEntry/project_index.html', {'Projects': projects, 'searchterm': searchterm})
+    return render(request,
+                  'formEntry/project_index.html',
+                  {'Projects': projects,
+                   'searchterm': searchterm})
 
 
 # def projectupdateview(request):
@@ -120,6 +123,7 @@ class ProjectUpdateView(UpdateView):
     template_name = 'formEntry/project_update.html'
 
     success_url = reverse_lazy('project_index')
+
 
     # def get_context_data(self, **kwargs):
     #     context = super(ProjectUpdateView, self).get_context_data(**kwargs)
