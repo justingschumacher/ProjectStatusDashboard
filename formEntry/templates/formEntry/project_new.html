@@ -1,13 +1,17 @@
 {% extends "formEntry/base.html" %}
-{%  load staticfiles %}
+{% load staticfiles %}
 
 
-{%  block content  %}
-    <h1>New Project</h1>
+{% block content  %}
+<div class="page-header">
+    <h1><a href="/">Home</a></h1>
+    <a href="{% url 'project_new' %}" class="top-menu"></a>
+</div>
+    <h1>Create New Project</h1>
     <form method="POST" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
 
         <button type="submit" class="save btn btn-default">Create New Project</button>
     </form>
-{%  endblock %}
+{% endblock %}

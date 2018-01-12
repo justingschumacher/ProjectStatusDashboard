@@ -23,6 +23,7 @@ settings.py
 projectstatusdashboard/
 templates/admin
 manage.py
-projectstatusdashboard.pid
 projectstatusdashboard_env/
 static/admin
+formEntry/migrations
+*.pid
