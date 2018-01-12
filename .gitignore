@@ -30,3 +30,4 @@ formEntry/migrations
 goaldashboard/
 goaldashboard_env/
 gunicorn.conf.py
+*_env/
