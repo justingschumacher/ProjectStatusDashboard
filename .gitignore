@@ -27,3 +27,6 @@ projectstatusdashboard_env/
 static/admin
 formEntry/migrations
 *.pid
+goaldashboard/
+goaldashboard_env/
+gunicorn.conf.py
