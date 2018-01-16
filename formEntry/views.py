@@ -120,28 +120,9 @@ class ProjectUpdateView(UpdateView):
               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals',
               'goalType', 'projectCompletionStatus')
 
-    template_name = 'formEntry/project_update.html'
+    template_name = 'formEntry/update.html'
 
     success_url = reverse_lazy('project_index')
-
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProjectUpdateView, self).get_context_data(**kwargs)
-    #     context['now'] = timezone.now()
-    #     return context
-
-    # model = Project
-    # form_class = ProjectForm
-
-    def form_valid(self, form):
-        form.save()
-        return super(ProjectUpdateView, self).form_valid(self)
-    def form_invalid(self, form):
-        form.save()
-        return super(ProjectUpdateView, self).form_valid(self)
-        # return HttpResponse('Error', self)
-
-
 
 
 class ProjectDetailView(DetailView):
