@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.db import models
 from django.utils import timezone
-from simple_history.models import HistoricalRecords
 
 
 # Create your models here.
@@ -46,7 +45,6 @@ class Project(models.Model):
     inputGoals = models.TextField(blank=True, null=True, max_length=256)
     outputGoals = models.TextField(blank=True, null=True, max_length=256)
     goalType = models.CharField(blank=True, null=True, max_length=256)
-    history = HistoricalRecords()
 
     def get_absolute_url(self):
         return reverse('project_update', kwargs={'pk': self.pk})
