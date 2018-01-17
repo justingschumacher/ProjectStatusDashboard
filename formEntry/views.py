@@ -50,8 +50,11 @@ from .forms import ProjectForm
 
 
 def index(request):
-    projects = Project.objects.exclude(projectCompletionStatus__startswith="Completed"
-                                       ).order_by('dueDate')
+    projects = Project.objects.filter(Q(projectCompletionStatus__icontains="Not Started") |
+                                      Q(projectCompletionStatus__icontains="In Progress") |
+                                      Q(projectCompletionStatus__icontains="On Hold") |
+                                      Q(projectCompletionStatus__icontains="Cancelled")
+                                      ).order_by('dueDate')
     searchterm = ''
     filterterm = ''
     if request.POST and request.POST.get('search'):
@@ -82,11 +85,12 @@ class ProjectNewView(CreateView):
 
     model = Project
 
-    fields = ['goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
-              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate',
-              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals',
-              'goalType', 'projectCompletionStatus']
+    fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
+              'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
+              'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
+              'description', 'comments', 'executiveSummary', 'definition',
+              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
+              ]
 
     template_name = 'formEntry/project_new.html'
 
@@ -99,11 +103,12 @@ class ProjectUpdateView(UpdateView):
 
     model = Project
 
-    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
-              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate',
-              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals',
-              'goalType', 'projectCompletionStatus')
+    fields = ('goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
+              'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
+              'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
+              'description', 'comments', 'executiveSummary', 'definition',
+              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
+              )
 
     template_name = 'formEntry/update.html'
 
