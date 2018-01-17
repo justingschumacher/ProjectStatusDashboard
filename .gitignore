@@ -32,3 +32,4 @@ goaldashboard_env/
 gunicorn.conf.py
 *_env/
 start_gunicorn
+gunicorn.conf.py
