@@ -1,5 +1,5 @@
 {% extends "formEntry/base.html" %}
-{%  load staticfiles %}
+{% load staticfiles %}
 
 {% block page_name %}index{% endblock %}
 
@@ -7,6 +7,7 @@
 
 <div class="page-header" xmlns="http://www.w3.org/1999/html">
     <h1><a href="/">Nordstrom Technology Projects</a></h1>
+    <p>Best viewed with Google Chrome!</p>
     <div class="container-fluid">
         <a href="{% url 'project_new' %}" class="top-menu">
         <button type="button" class="btn btn-outline-dark">New Project</button></a>
@@ -38,7 +39,7 @@
                         {% elif project.projectStatus.lower == 'yellow' %}alert alert-warning
                         {% else %}alert alert-success{% endif %}">
                     <div class="col-sm-1">
-                        <p><b>Number:</b> {{ project.goal }} - {{ project.projectRecordID }}</p>
+                        <p><b>Number:</b> {{ project.goal }} - PK: {{ project.projectRecordID }}</p>
                         <p><b>Name:</b></br>{{ project.name }}</p>
                         <p><b>Status:</b> {{ project.projectCompletionStatus }}</p>
                     </div>
@@ -47,8 +48,8 @@
                         <p><b>Group:</b></br> {{ project.group }}</p>
                     </div>
                     <div class="col-sm-8">
-                        <p><b>Description:</b></br> {{ project.description|truncatewords:20 }}</p>
-                        <p><b>Summary:</b></br> {{ project.executiveSummary|truncatewords:20 }}</p>
+                        <p><b>Description:</b></br> {{ project.description|truncatewords:40 }}</p>
+                        <p><b>Executive Summary:</b></br> {{ project.executiveSummary|truncatewords:40 }}</p>
                     </div>
                     <div class="col-sm-1">
                         <p><b>Start:</b></br> {{ project.startDate }}</p>
