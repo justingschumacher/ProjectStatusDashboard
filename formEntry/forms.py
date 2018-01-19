@@ -14,3 +14,6 @@ class ProjectForm(forms.ModelForm):
                   'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
                   )
 
+class ProjectNewForm(forms.Form):
+    goal = forms.IntegerField(label='Goal Number:')
+    name = forms.CharField(label='Goal Name:', max_length=128)

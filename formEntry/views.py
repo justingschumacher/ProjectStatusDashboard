@@ -1,84 +1,103 @@
 from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DeleteView, DetailView
+from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from .models import Project
 from .forms import ProjectForm
 
 
 # Create your views here.
 
-# class ProjectIndexView(DetailView):
-#
-#     model = Project
-#
-#     fields = ('projectRecordID', 'goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-#               'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
-#               'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate',
-#               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals',
-#               'goalType', 'projectCompletionStatus')
-#
-#     template_name = 'formEntry/project_index.html'
-#
-#     success_url = reverse_lazy('project_index')
-#
-#     def get(self, request, *args, **kwargs):
-#         projects = Project.objects.order_by('dueDate')
-#         searchterm = ''
-#         filterterm = ''
-#         if request.POST and request.POST.get('search'):
-#             searchterm = request.POST.get('search').lower()
-#             projects = projects.filter(Q(group__icontains=searchterm) |
-#                                        Q(name__icontains=searchterm) |
-#                                        Q(projectStatus__icontains=searchterm) |
-#                                        Q(goal__icontains=searchterm) |
-#                                        Q(owner__icontains=searchterm) |
-#                                        Q(projectCompletionStatus__icontains=searchterm)
-#                                        )
-#         if request.POST and request.POST.get('filter'):
-#             filterterm = request.POST.get('filter').lower()
-#             projects = projects.filter(Q(group__icontains=filterterm) |
-#                                        Q(name__icontains=filterterm) |
-#                                        Q(projectStatus__icontains=filterterm) |
-#                                        Q(goal__icontains=filterterm) |
-#                                        Q(owner__icontains=filterterm) |
-#                                        Q(projectCompletionStatus__icontains=searchterm)
-#                                        )
-#         return render(request, 'formEntry/project_index.html', {'Projects': projects, 'searchterm': searchterm})
+class ProjectIndexView(View):
+
+    model = Project
+
+    fields = ('projectRecordID', 'goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
+              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
+              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate',
+              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals',
+              'goalType', 'projectCompletionStatus')
+
+    template_name = 'formEntry/project_index.html'
+
+    form_class = ProjectForm
+
+    success_url = reverse_lazy('project_index')
+
+    def get(self, request):
+        projects = Project.objects.filter(Q(projectCompletionStatus__icontains="Not Started") |
+                                          Q(projectCompletionStatus__icontains="In Progress") |
+                                          Q(projectCompletionStatus__icontains="On Hold") |
+                                          Q(projectCompletionStatus__icontains="Cancelled")
+                                          ).exclude(Q(projectCompletionStatus__icontains="Completed")
+                                                    ).order_by('dueDate')
+        return render(request,
+                      self.template_name,
+                      {'Projects': projects})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        projects = Project.objects.order_by('dueDate')
+        searchterm = ''
+        filterterm = ''
+        if request.POST and request.POST.get('search'):
+            searchterm = request.POST.get('search').lower()
+            projects = projects.filter(Q(group__icontains=searchterm) |
+                                       Q(name__icontains=searchterm) |
+                                       Q(projectStatus__icontains=searchterm) |
+                                       Q(goal__icontains=searchterm) |
+                                       Q(owner__icontains=searchterm) |
+                                       Q(projectCompletionStatus__icontains=searchterm)
+                                       )
+        if request.POST and request.POST.get('filter'):
+            filterterm = request.POST.get('filter').lower()
+            projects = projects.filter(Q(group__icontains=filterterm) |
+                                       Q(name__icontains=filterterm) |
+                                       Q(projectStatus__icontains=filterterm) |
+                                       Q(goal__icontains=filterterm) |
+                                       Q(owner__icontains=filterterm) |
+                                       Q(projectCompletionStatus__icontains=searchterm)
+                                       )
+        return render(request,
+                      self.template_name,
+                      {'Projects': projects,
+                       'searchterm': searchterm})
 
 
-def index(request):
-    projects = Project.objects.filter(Q(projectCompletionStatus__icontains="Not Started") |
-                                      Q(projectCompletionStatus__icontains="In Progress") |
-                                      Q(projectCompletionStatus__icontains="On Hold") |
-                                      Q(projectCompletionStatus__icontains="Cancelled")
-                                      ).order_by('dueDate')
-    searchterm = ''
-    filterterm = ''
-    if request.POST and request.POST.get('search'):
-        searchterm = request.POST.get('search').lower()
-        projects = projects.filter(Q(group__icontains=searchterm) |
-                                   Q(name__icontains=searchterm) |
-                                   Q(projectStatus__icontains=searchterm) |
-                                   Q(goal__icontains=searchterm) |
-                                   Q(owner__icontains=searchterm) |
-                                   Q(projectCompletionStatus__icontains=searchterm)
-                                   )
-    if request.POST and request.POST.get('filter'):
-        filterterm = request.POST.get('filter').lower()
-        projects = projects.filter(Q(group__icontains=filterterm) |
-                                   Q(name__icontains=filterterm) |
-                                   Q(projectStatus__icontains=filterterm) |
-                                   Q(goal__icontains=filterterm) |
-                                   Q(owner__icontains=filterterm) |
-                                   Q(projectCompletionStatus__icontains=searchterm)
-                                   )
-    return render(request,
-                  'formEntry/project_index.html',
-                  {'Projects': projects,
-                   'searchterm': searchterm})
+# def index(request):
+#     projects = Project.objects.filter(Q(projectCompletionStatus__icontains="Not Started") |
+#                                       Q(projectCompletionStatus__icontains="In Progress") |
+#                                       Q(projectCompletionStatus__icontains="On Hold") |
+#                                       Q(projectCompletionStatus__icontains="Cancelled")
+#                                       ).order_by('dueDate')
+#     searchterm = ''
+#     filterterm = ''
+#     if request.POST and request.POST.get('search'):
+#         searchterm = request.POST.get('search').lower()
+#         projects = projects.filter(Q(group__icontains=searchterm) |
+#                                    Q(name__icontains=searchterm) |
+#                                    Q(projectStatus__icontains=searchterm) |
+#                                    Q(goal__icontains=searchterm) |
+#                                    Q(owner__icontains=searchterm) |
+#                                    Q(projectCompletionStatus__icontains=searchterm)
+#                                    )
+#     if request.POST and request.POST.get('filter'):
+#         filterterm = request.POST.get('filter').lower()
+#         projects = projects.filter(Q(group__icontains=filterterm) |
+#                                    Q(name__icontains=filterterm) |
+#                                    Q(projectStatus__icontains=filterterm) |
+#                                    Q(goal__icontains=filterterm) |
+#                                    Q(owner__icontains=filterterm) |
+#                                    Q(projectCompletionStatus__icontains=searchterm)
+#                                    )
+#     return render(request,
+#                   'formEntry/project_index.html',
+#                   {'Projects': projects,
+#                    'searchterm': searchterm})
 
 
 class ProjectNewView(CreateView):
@@ -110,9 +129,11 @@ class ProjectUpdateView(UpdateView):
               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
               )
 
-    template_name = 'formEntry/update.html'
+    template_name = 'formEntry/project_update_new.html'
 
     success_url = reverse_lazy('project_index')
+
+
 
 
 class ProjectDetailView(DetailView):
