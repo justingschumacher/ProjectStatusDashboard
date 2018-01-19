@@ -129,7 +129,7 @@ class ProjectUpdateView(UpdateView):
               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
               )
 
-    template_name = 'formEntry/project_update_new.html'
+    template_name = 'formEntry/update.html'
 
     success_url = reverse_lazy('project_index')
 
