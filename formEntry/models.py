@@ -79,3 +79,9 @@ class Project(models.Model):
 
     def __str__(self):
         return self.goal
+
+class ProjectForm(ModelForm):
+    class meta:
+        model = Project
+        fields = '__all__'
+        
