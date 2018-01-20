@@ -39,9 +39,10 @@
                         {% elif project.projectStatus.lower == 'yellow' %}alert alert-warning
                         {% else %}alert alert-success{% endif %}">
                     <div class="col-sm-1">
-                        <p><b>Number:</b> {{ project.goal }} - PK: {{ project.projectRecordID }}</p>
-                        <p><b>Name:</b></br>{{ project.name }}</p>
-                        <p><b>Status:</b> {{ project.projectCompletionStatus }}</p>
+                        <p><b>Number:</b> {{ project.goal }}</p>
+                        <p><b>DB Key #:</b> {{ project.projectRecordID }}</p>
+                        <p><b>Project Name:</b></br>{{ project.name }}</p>
+                        <p><b>Status:</b></br> {{ project.projectCompletionStatus }}</p>
                     </div>
                     <div class="col-sm-1">
                         <p><b>Director:</b></br> {{ project.owner }}</p>
@@ -50,6 +51,7 @@
                     <div class="col-sm-8">
                         <p><b>Description:</b></br> {{ project.description|truncatewords:40 }}</p>
                         <p><b>Executive Summary:</b></br> {{ project.executiveSummary|truncatewords:40 }}</p>
+                        <p><b>Path to Green:</b></br> {{ project.pathtogreen|truncatewords:40 }}</p>
                     </div>
                     <div class="col-sm-1">
                         <p><b>Start:</b></br> {{ project.startDate }}</p>

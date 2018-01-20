@@ -1,11 +1,10 @@
 from django.db.models import Q
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.views.generic import DeleteView, DetailView
 from django.views import View
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
 from django.utils import timezone
 from django.urls import reverse_lazy
-from django.http import HttpResponse
 from .models import Project
 from .forms import ProjectForm
 
@@ -39,11 +38,9 @@ class ProjectIndexView(View):
                       self.template_name,
                       {'Projects': projects})
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+    def post(self, request):
         projects = Project.objects.order_by('dueDate')
         searchterm = ''
-        filterterm = ''
         if request.POST and request.POST.get('search'):
             searchterm = request.POST.get('search').lower()
             projects = projects.filter(Q(group__icontains=searchterm) |
@@ -68,38 +65,6 @@ class ProjectIndexView(View):
                        'searchterm': searchterm})
 
 
-# def index(request):
-#     projects = Project.objects.filter(Q(projectCompletionStatus__icontains="Not Started") |
-#                                       Q(projectCompletionStatus__icontains="In Progress") |
-#                                       Q(projectCompletionStatus__icontains="On Hold") |
-#                                       Q(projectCompletionStatus__icontains="Cancelled")
-#                                       ).order_by('dueDate')
-#     searchterm = ''
-#     filterterm = ''
-#     if request.POST and request.POST.get('search'):
-#         searchterm = request.POST.get('search').lower()
-#         projects = projects.filter(Q(group__icontains=searchterm) |
-#                                    Q(name__icontains=searchterm) |
-#                                    Q(projectStatus__icontains=searchterm) |
-#                                    Q(goal__icontains=searchterm) |
-#                                    Q(owner__icontains=searchterm) |
-#                                    Q(projectCompletionStatus__icontains=searchterm)
-#                                    )
-#     if request.POST and request.POST.get('filter'):
-#         filterterm = request.POST.get('filter').lower()
-#         projects = projects.filter(Q(group__icontains=filterterm) |
-#                                    Q(name__icontains=filterterm) |
-#                                    Q(projectStatus__icontains=filterterm) |
-#                                    Q(goal__icontains=filterterm) |
-#                                    Q(owner__icontains=filterterm) |
-#                                    Q(projectCompletionStatus__icontains=searchterm)
-#                                    )
-#     return render(request,
-#                   'formEntry/project_index.html',
-#                   {'Projects': projects,
-#                    'searchterm': searchterm})
-
-
 class ProjectNewView(CreateView):
 
     model = Project
@@ -116,8 +81,6 @@ class ProjectNewView(CreateView):
     success_url = reverse_lazy('project_index')
 
 
-
-
 class ProjectUpdateView(UpdateView):
 
     model = Project
@@ -128,8 +91,8 @@ class ProjectUpdateView(UpdateView):
               'description', 'comments', 'executiveSummary', 'definition',
               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
               )
-
-    template_name = 'formEntry/update.html'
+    # form_class = ProjectNewForm
+    template_name = 'formEntry/project_update.html'
 
     success_url = reverse_lazy('project_index')
 
@@ -156,8 +119,6 @@ class ProjectDetailView(DetailView):
         return context
 
 
-
-
 class ProjectDeleteView(DeleteView):
 
     model = Project
@@ -171,11 +132,3 @@ class ProjectDeleteView(DeleteView):
     template_name = 'formEntry/project_delete.html'
 
     success_url = reverse_lazy('project_index')
-
-    def get_context_data(self, **kwargs):
-        projectRecordID = get_object_or_404(Project, pk=pk)
-        form = ProjectForm(request.POST or None, instance=projectRecordID)
-        if request.method == 'POST':
-            form.delete()
-            return redirect('formEntry/project_index.html')
-        return render(request, template_name, {'form': form})
