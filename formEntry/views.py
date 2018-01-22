@@ -4,7 +4,7 @@ from django.views.generic import DeleteView, DetailView
 from django.views import View
 from django.shortcuts import render
 from django.utils import timezone
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Project
 from .forms import ProjectForm
 
@@ -85,38 +85,24 @@ class ProjectUpdateView(UpdateView):
 
     model = Project
 
-    fields = ('goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
+    fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
               'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
               'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
               'description', 'comments', 'executiveSummary', 'definition',
               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
-              )
-    # form_class = ProjectNewForm
-    template_name = 'formEntry/project_update.html'
+              ]
+    template_name = 'formEntry/project_update_new.html'
 
     success_url = reverse_lazy('project_index')
-
-
 
 
 class ProjectDetailView(DetailView):
 
     model = Project
 
-    fields = ('goal', 'owner', 'group', 'restrictedStatus', 'startDate', 'dueDate', 'revisedDueDate',
-              'completionDate', 'didNotMeetDate', 'projectStatus', 'linkToMetrics', 'deck', 'name',
-              'description', 'comments', 'executiveSummary', 'definition', 'createdDate', 'editDate',
-              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals',
-              'goalType', 'projectCompletionStatus')
-
     template_name = 'formEntry/project_detail.html'
 
     success_url = reverse_lazy('project_index')
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
 
 
 class ProjectDeleteView(DeleteView):

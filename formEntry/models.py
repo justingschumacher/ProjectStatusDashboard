@@ -84,4 +84,3 @@ class ProjectForm(ModelForm):
     class meta:
         model = Project
         fields = '__all__'
-        

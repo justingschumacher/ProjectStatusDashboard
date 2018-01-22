@@ -1,5 +1,5 @@
 from django import forms
-from formEntry.models import Project
+from .models import Project
 
 
 class ProjectForm(forms.ModelForm):
@@ -7,12 +7,18 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = '__all__'
-        # fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
-        #           'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
-        #           'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-        #           'description', 'comments', 'executiveSummary', 'definition',
-        #           'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
-        #           ]
+
+
+class ProjectUpdateForm(forms.ModelForm):
+    model = Project
+    fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
+              'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
+              'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
+              'description', 'comments', 'executiveSummary', 'definition',
+              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
+              ]
+
+
 
 
 # class ProjectNewForm(forms.Form):
@@ -46,7 +52,7 @@ class ProjectForm(forms.ModelForm):
 #     deck = forms.URLField(label='Link to Project Deck:', required=False)
 #     comments = forms.CharField(label='Comments About Project:',
 #                                max_length=256,
-#                                widget=forms.Textarea,
+#                                widgets={'name': Textarea(attrs={'cols': 80, 'rows': 20})},
 #                                required=False)
 #     executiveSummary = forms.CharField(label='High Level Executive Summary:',
 #                                        max_length=256,
