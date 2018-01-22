@@ -4,36 +4,54 @@
 {% block page_name %}project_update{% endblock %}
 {% block content %}
 
-<form action="" method="post">
-    <div class="page-header">
-        <h4><a href="{% url 'project_index' %}">Return Home</a></h4>
-    </div>
-    <h4>Update Project</h4>
-</form>
-<form>
-<input type="submit" value="Update">
-{% csrf_token %}
-    <table>
-        {% for field in form %}
-            <tr>
-                <th>{{ field.label_tag }}</th>
-                <td>
-                {% if field.errors %}
-                    <ul>
-                        {% for error in field.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                {{ field }}
-                {% if field.help_text %}
-                    {{ field.help_text }}
-                {% endif %}
-                </td>
-            </tr>
+<h4><a href="{% url 'project_index' %}">Return Home</a></h4>
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  <button type="submit">Submit</button>
+
+
+  {% if form.non_field_errors %}
+    <ul>
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% for hidden_field in form.hidden_fields %}
+    {% if hidden_field.errors %}
+      <ul>
+        {% for error in hidden_field.errors %}
+          <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
         {% endfor %}
-    </table>
-<input type="submit" value="Update">
+      </ul>
+    {% endif %}
+    {{ hidden_field }}
+  {% endfor %}
+
+  <table>
+    {% for field in form.visible_fields %}
+      <tr>
+        <th>{{ field.label_tag }}</th>
+        <td>
+          {% if field.errors %}
+            <ul>
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {{ field }}
+          {% if field.help_text %}
+            {{ field.help_text }}
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <button type="submit">Submit</button>
 </form>
 {% endblock  %}
 
