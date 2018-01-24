@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.db import models
 from django.utils import timezone
-from django.forms import ModelForm
 
 # Create your models here.
 
@@ -79,8 +78,3 @@ class Project(models.Model):
 
     def __str__(self):
         return self.goal
-
-class ProjectForm(ModelForm):
-    class meta:
-        model = Project
-        fields = '__all__'

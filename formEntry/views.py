@@ -71,7 +71,7 @@ class ProjectNewView(CreateView):
     fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
               'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
               'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-              'comments', 'executiveSummary','pathToGreen', 'previousMilestone',
+              'comments', 'executiveSummary', 'pathToGreen', 'previousMilestone',
               'currentMilestone', 'inputGoals', 'outputGoals'
               ]
 
@@ -87,11 +87,11 @@ class ProjectUpdateView(UpdateView):
     fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
               'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
               'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-              'comments', 'executiveSummary','pathToGreen', 'previousMilestone',
+              'comments', 'executiveSummary', 'pathToGreen', 'previousMilestone',
               'currentMilestone', 'inputGoals', 'outputGoals'
               ]
 
-    template_name = 'formEntry/project_update_new.html'
+    template_name = 'formEntry/project_update.html'
 
     success_url = reverse_lazy('project_index')
 

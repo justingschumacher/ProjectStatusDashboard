@@ -38,7 +38,12 @@
                 <div class="container-fluid">
                     <a href="{% url 'project_update' project.projectRecordID %}">
                         <button type="button" class="btn btn-outline-dark">Edit {{ project.name }}</button></a>
+                    <a href="{% url 'project_delete' project.projectRecordID %}">
+                        <button type="button" class="btn btn-outline-dark">Delete {{ project.name }}</button></a>
                 </div>
+            </div>
+            <div class="form-group">
+
             </div>
             <a href="{% url 'project_detail' project.projectRecordID %}">
                 <div id=clickable-row class="row

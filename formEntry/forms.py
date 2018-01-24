@@ -77,31 +77,3 @@ class ProjectNewForm(forms.Form):
     outputGoals = forms.CharField(label='Goals Being Fed by this Project:',
                                   max_length=256,
                                   required=False)
-
-
-    def clean(self):
-        cleaned_data = super(ProjectNewForm, self).clean()
-        goal = cleaned_data.get('goal')
-        name = cleaned_data.get('name')
-        owner = cleaned_data.get('owner')
-        group = cleaned_data.get('group')
-        projectStatus = cleaned_data.get('projectStatus')
-        projectCompletionStatus = cleaned_data.get('projectCompletionStatus')
-        startDate = cleaned_data.get('startDate')
-        dueDate = cleaned_data.get('dueDate')
-        revisedDueDate = cleaned_data.get('revisedDueDate')
-        completionDate = cleaned_data.get('completionDate')
-        didNotMeetDate = cleaned_data.get('didNotMeetDate')
-        editDate = cleaned_data.get('editDate')
-        createdDate = cleaned_data.get('createdDate')
-        linkToMetrics = cleaned_data.get('linkToMetrics')
-        deck = cleaned_data.get('deck')
-        comments = cleaned_data.get('comments')
-        executiveSummary = cleaned_data.get('executiveSummary')
-        description = cleaned_data.get('description')
-        pathToGreen = cleaned_data.get('pathToGreen')
-        previousMilestone = cleaned_data.get('previousMilestone')
-        currentMilestone = cleaned_data.get('currentMilestone')
-        inputGoals = cleaned_data.get('inputGoals')
-        outputGoals = cleaned_data.get('outputGoals')
-        return cleaned_data

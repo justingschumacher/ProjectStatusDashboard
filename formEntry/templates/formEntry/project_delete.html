@@ -3,8 +3,9 @@
 {%  block content  %}
 
 <form method="post">{% csrf_token %}
-    Are you sure you want to delete "{{ form.name }}" ?
-    <input type="submit" value="Submit" />
+    <h1>Are you sure you want to delete "{{ object.name }}"?</h1>
+    <h2>The data will be lost forever!</h2>
+    <input class="alert-danger" type="submit" value="Delete {{ object.name }}" />
 </form>
 
 {% endblock %}
