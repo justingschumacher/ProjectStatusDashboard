@@ -1,10 +1,10 @@
 from django.db.models import Q
-from django.views.generic.edit import CreateView, UpdateView, FormView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DeleteView, DetailView
 from django.views import View
 from django.shortcuts import render
 from django.utils import timezone
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from .models import Project
 from .forms import ProjectForm
 
@@ -91,7 +91,8 @@ class ProjectUpdateView(UpdateView):
               'description', 'comments', 'executiveSummary', 'definition',
               'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
               ]
-    template_name = 'formEntry/project_update.html'
+
+    template_name = 'formEntry/project_update_new.html'
 
     success_url = reverse_lazy('project_index')
 

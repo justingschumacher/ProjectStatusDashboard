@@ -33,6 +33,12 @@
 <div class="container-fluid">
     {% for project in Projects %}
         <div class="panel">
+            <div class="form-group">
+                <div class="container-fluid">
+                    <a href="{% url 'project_detail' project.projectRecordID %}">
+                        <button type="button" class="btn btn-outline-dark">{{ project.name }} Details</button></a>
+                </div>
+            </div>
             <a href="/project/update/{{ project.projectRecordID }}">
                 <div id=clickable-row class="row
                         {% if project.projectStatus.lower == 'red' %}alert alert-danger
