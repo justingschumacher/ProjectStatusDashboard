@@ -72,8 +72,8 @@ class ProjectNewView(CreateView):
     fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
               'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
               'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-              'description', 'comments', 'executiveSummary', 'definition',
-              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
+              'comments', 'executiveSummary','pathToGreen', 'previousMilestone',
+              'currentMilestone', 'inputGoals', 'outputGoals'
               ]
 
     template_name = 'formEntry/project_new.html'
@@ -88,8 +88,8 @@ class ProjectUpdateView(UpdateView):
     fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
               'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
               'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-              'description', 'comments', 'executiveSummary', 'definition',
-              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
+              'comments', 'executiveSummary','pathToGreen', 'previousMilestone',
+              'currentMilestone', 'inputGoals', 'outputGoals'
               ]
 
     template_name = 'formEntry/project_update_new.html'

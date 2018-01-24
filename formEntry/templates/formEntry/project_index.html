@@ -35,11 +35,11 @@
         <div class="panel">
             <div class="form-group">
                 <div class="container-fluid">
-                    <a href="{% url 'project_detail' project.projectRecordID %}">
-                        <button type="button" class="btn btn-outline-dark">{{ project.name }} Details</button></a>
+                    <a href="{% url 'project_update' project.projectRecordID %}">
+                        <button type="button" class="btn btn-outline-dark">Edit {{ project.name }}</button></a>
                 </div>
             </div>
-            <a href="/project/update/{{ project.projectRecordID }}">
+            <a href="/project/detail/{{ project.projectRecordID }}">
                 <div id=clickable-row class="row
                         {% if project.projectStatus.lower == 'red' %}alert alert-danger
                         {% elif project.projectStatus.lower == 'yellow' %}alert alert-warning
@@ -55,9 +55,9 @@
                         <p><b>Group:</b></br> {{ project.group }}</p>
                     </div>
                     <div class="col-sm-8">
-                        <p><b>Description:</b></br> {{ project.description|truncatewords:40 }}</p>
-                        <p><b>Executive Summary:</b></br> {{ project.executiveSummary|truncatewords:40 }}</p>
-                        <p><b>Path to Green:</b></br> {{ project.pathtogreen|truncatewords:40 }}</p>
+                        <p><b>Executive Summary:</b></br> {{ project.executiveSummary|truncatewords:80 }}</p>
+                        <p><b>Comments:</b></br> {{ project.comments|truncatewords:80 }}</p>
+                        <p><b>Path to Green:</b></br> {{ project.pathtogreen|truncatewords:80 }}</p>
                     </div>
                     <div class="col-sm-1">
                         <p><b>Start:</b></br> {{ project.startDate }}</p>
