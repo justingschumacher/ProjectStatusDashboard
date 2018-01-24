@@ -3,7 +3,6 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DeleteView, DetailView
 from django.views import View
 from django.shortcuts import render
-from django.utils import timezone
 from django.urls import reverse_lazy
 from .models import Project
 from .forms import ProjectForm
