@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="page-header" xmlns="http://www.w3.org/1999/html">
-    <h1><a href="/">Nordstrom Technology Projects</a></h1>
+    <h1><a href="{% url 'project_index' %}">Nordstrom Technology Projects</a></h1>
     <h4>Presented by ITR</h4>
     <div class="container-fluid">
         <a href="{% url 'project_new' %}" class="top-menu">
@@ -37,8 +37,8 @@
                 <div class="container-fluid">
                     <a href="{% url 'project_update' project.projectRecordID %}">
                         <button type="button" class="btn btn-outline-dark">Edit {{ project.name }}</button></a>
-                    <a href="{% url 'project_delete' project.projectRecordID %}">
-                        <button type="button" class="btn btn-outline-dark">Delete {{ project.name }}</button></a>
+{#                    <a href="{% url 'project_delete' project.projectRecordID %}">#}
+{#                        <button type="button" class="btn btn-outline-dark">Delete {{ project.name }}</button></a>#}
                 </div>
             </div>
             <a href="{% url 'project_detail' project.projectRecordID %}">
@@ -48,8 +48,8 @@
                         {% else %}alert alert-success{% endif %}">
                     <div class="col-1">
                         <p><b>Number:</b> {{ project.goal }}</p>
-                        <p><b>DB Key #:</b> {{ project.projectRecordID }}</p>
-                        <p><b>Project Name:</b><br />{{ project.name }}</p>
+{#                        <p><b>DB Key #:</b> {{ project.projectRecordID }}</p>#}
+                        <p><b>Goal Name:</b><br />{{ project.name }}</p>
                         <p><b>Status:</b><br /> {{ project.projectCompletionStatus }}</p>
                     </div>
                     <div class="col-1">

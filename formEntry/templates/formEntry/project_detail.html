@@ -10,8 +10,8 @@
 {% csrf_token %}
 
     <div class="page-header">
-        <h1><a href="/">Nordstrom Technology Projects</a></h1>
-        <h4>Update Page for Project: {{object.name}}.</h4>
+        <h4><a href="{% url 'project_index' %}">Return Home</a></h4>
+        <h4>Update Page for Goal: {{object.name}}.</h4>
         <a href="{% url 'project_update' project.projectRecordID %}">
             <button type="button" class="btn btn-outline-dark">Edit {{ project.name }}</button></a>
     </div>
@@ -27,7 +27,7 @@
                                     {% elif project.projectStatus.lower == 'yellow' %}alert alert-warning
                                     {% else %}alert alert-success{% endif %}">
                                     <tr>
-                                      <th>Summary</th>
+                                      <th>Summary for Goal: {{ project.name }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
