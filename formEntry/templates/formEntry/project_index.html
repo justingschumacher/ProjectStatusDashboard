@@ -18,18 +18,19 @@
     {% csrf_token %}
     <div class="form-group">
         <div class="input-group">
-            <input type="text" placeholder="Search" name="search" value="{{ searchterm }}">
-            <button type="submit" class="save btn btn-default input-group-addon">Search</button>
+            <input type="text" placeholder="Search" name="search" value="{{ searchterm }}"><br />
+            <button type="submit" class="save btn btn-outline-dark">Search</button>
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
-            <input type="text" placeholder="Filter" name="filter" value="{{ filterterm }}">
-            <button type="submit" class="save btn btn-default input-group-addon">Filter</button>
+            <input type="text" placeholder="Filter" name="filter" value="{{ filterterm }}"><br />
+            <button type="submit" class="save btn btn-outline-dark">Filter</button>
         </div>
     </div>
 </form>
 <br/><br/>
+<p class="text-center font-weight-bold">Click a goal below for the details of that goal!</p>
 <div class="container-fluid">
     {% for project in Projects %}
         <div class="panel">
@@ -42,7 +43,7 @@
                 </div>
             </div>
             <a href="{% url 'project_detail' project.projectRecordID %}">
-                <div id=clickable-row class="row
+                <div id=clickable-row class="row row-hover
                         {% if project.projectStatus.lower == 'red' %}alert alert-danger
                         {% elif project.projectStatus.lower == 'yellow' %}alert alert-warning
                         {% else %}alert alert-success{% endif %}">

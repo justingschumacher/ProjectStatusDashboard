@@ -37,10 +37,10 @@ body.project_update thead {
 }
 
 #clickable-row:hover {
-    background-color: transparent;
+    background-color: lawngreen;
 }
 
 #clickable-row:active {
-    background-color: gray;
+    background-color: green;
     top: +2px;
 }
