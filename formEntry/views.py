@@ -57,7 +57,8 @@ class ProjectIndexView(View):
                                        Q(goal__icontains=filterterm) |
                                        Q(owner__icontains=filterterm) |
                                        Q(projectCompletionStatus__icontains=searchterm)
-                                       )
+                                       ).exclude(Q(projectCompletionStatus__icontains="Completed")
+                                                 ).order_by('dueDate')
         return render(request,
                       self.template_name,
                       {'Projects': projects,

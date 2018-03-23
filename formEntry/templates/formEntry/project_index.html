@@ -31,6 +31,7 @@
 </form>
 <br/><br/>
 <p class="text-center font-weight-bold">Click a goal below for the details of that goal!</p>
+<p class="text-center font-weight-bold">Complete goals are hidden, click "Search" to expose all goals.</p>
 <div class="container-fluid">
     {% for project in Projects %}
         <div class="panel">
@@ -48,27 +49,25 @@
                         {% elif project.projectStatus.lower == 'yellow' %}alert alert-warning
                         {% else %}alert alert-success{% endif %}">
                     <div class="col-1">
-                        <p><b>Number:</b> {{ project.goal }}</p>
-{#                        <p><b>DB Key #:</b> {{ project.projectRecordID }}</p>#}
                         <p><b>Goal Name:</b><br />{{ project.name }}</p>
-                        <p><b>Status:</b><br /> {{ project.projectCompletionStatus }}</p>
+                        <p><b>Completion Status:</b><br /> {{ project.projectCompletionStatus }}</p>
                     </div>
                     <div class="col-1">
                         <p><b>Director:</b><br /> {{ project.owner }}</p>
                         <p><b>Group:</b><br /> {{ project.group }}</p>
                     </div>
                     <div class="col-7">
-                        <p><b>Executive Summary:</b><br /> {{ project.executiveSummary|truncatewords:80 }}</p>
-                        <p><b>Comments:</b><br /> {{ project.comments|truncatewords:80 }}</p>
-                        <p><b>Path to Green:</b><br /> {{ project.pathToGreen|truncatewords:80 }}</p>
+                        <p><b>Description:</b><br /> {{ project.description|truncatewords:80 }}</p>
+                        <p><b>Notes:</b><br /> {{ project.notes|truncatewords:80 }}</p>
+                        <p><b>Risks:</b><br /> {{ project.risks|truncatewords:80 }}</p>
                     </div>
                     <div class="col-1">
                         <p><b>Start:</b><br /> {{ project.startDate }}</p>
                         <p><b>Due:</b><br> {{ project.dueDate }}</p>
                     </div>
                     <div class="col-1">
-                        <p><b>Revised Due:</b><br /> {{ project.revisedDueDate }}</p>
-                        <p><b>Missed Date:</b><br /> {{ project.didNotMeetDate }}</p>
+                        <p><b>Revised/Estimated Due:</b><br /> {{ project.revisedDueDate }}</p>
+                        <p><b>Percent Complete:</b><br /> {{ project.percent_complete }}</p>
                     </div>
                 </div>
             </a>

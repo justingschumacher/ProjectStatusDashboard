@@ -48,8 +48,8 @@ class ProjectNewForm(forms.Form):
     revisedDueDate = forms.DateField(label='Revised Due Date:', required=False)
     completionDate = forms.DateField(label='Completion Date:', required=False)
     didNotMeetDate = forms.DateField(label='Did Not Meet Date:', required=False)
-    editDate = forms.DateField(label='Last Edit Date:', required=False)
-    createdDate = forms.DateField(label='Date Created:', required=False)
+    # editDate = forms.DateField(label='Last Edit Date:', required=False)
+    # createdDate = forms.DateField(label='Date Created:', required=False)
     linkToMetrics = forms.URLField(label='Link to Metrics Page:', required=False)
     deck = forms.URLField(label='Link to Project Deck:', required=False)
     comments = forms.CharField(label='Comments About Project:',
