@@ -69,15 +69,15 @@ class Project(models.Model):
                                    verbose_name="Goals this Goal Informs/Drives: ")
     risks = models.CharField(max_length=1024, blank=True, null=True,
                              verbose_name="Risks for Goal: ")
-    percent_complete = models.DecimalField(max_digits=2, decimal_places=2, blank=True, null=True,
+    percent_complete = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True,
                                            verbose_name="Percent complete: ")
-    pm = models.TextField(blank=True, null=True,
+    pm = models.CharField(max_length=128, blank=True, null=True,
                           verbose_name="Project Manager / Manager: ")
     investment = models.CharField(max_length=1024, blank=True, null=True,
                                   verbose_name="Investment: ")
-    jira_reference = models.TextField(blank=True, null=True,
+    jira_reference = models.CharField(max_length=128, blank=True, null=True,
                                       verbose_name="Jira Item Link: ")
-    project_engineer = models.TextField(blank=True, null=True,
+    project_engineer = models.CharField(max_length=128, blank=True, null=True,
                                         verbose_name="Goal Engineer: ")
 
     def get_absolute_url(self):

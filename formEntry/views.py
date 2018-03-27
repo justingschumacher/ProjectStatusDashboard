@@ -85,12 +85,18 @@ class ProjectUpdateView(UpdateView):
 
     model = Project
 
-    fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
-              'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
-              'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-              'comments', 'executiveSummary', 'pathToGreen', 'previousMilestone',
-              'currentMilestone', 'inputGoals', 'outputGoals'
-              ]
+    fields = [
+        'owner', 'jira_reference', 'executiveSummary', 'startDate', 'dueDate',
+        'revisedDueDate', 'completionDate', 'percent_complete', 'projectStatus',
+        'projectCompletionStatus', 'currentMilestone', 'previousMilestone',
+        'description', 'risks', 'comments',
+    ]
+    # fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
+    #           'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
+    #           'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
+    #           'comments', 'executiveSummary', 'pathToGreen', 'previousMilestone',
+    #           'currentMilestone', 'inputGoals', 'outputGoals'
+    #           ]
 
     template_name = 'formEntry/project_update.html'
 

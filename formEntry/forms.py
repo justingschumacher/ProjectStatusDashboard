@@ -11,12 +11,18 @@ class ProjectForm(forms.ModelForm):
 
 class ProjectUpdateForm(forms.ModelForm):
     model = Project
-    fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
-              'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
-              'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-              'description', 'comments', 'executiveSummary', 'definition',
-              'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
-              ]
+    fields = [
+        'owner', 'jira_reference', 'executiveSummary', 'startDate', 'dueDate',
+        'revisedDueDate', 'completionDate', 'percent_complete', 'projectStatus',
+        'projectCompletionStatus', 'currentMilestone', 'previousMilestone',
+        'description', 'risks', 'comments',
+    ]
+    # fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
+    #           'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
+    #           'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
+    #           'description', 'comments', 'executiveSummary', 'definition',
+    #           'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
+    #           ]
 
 
 class ProjectNewForm(forms.Form):
