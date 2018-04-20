@@ -91,12 +91,6 @@ class ProjectUpdateView(UpdateView):
         'projectCompletionStatus', 'currentMilestone', 'previousMilestone',
         'description', 'risks', 'comments',
     ]
-    # fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
-    #           'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
-    #           'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-    #           'comments', 'executiveSummary', 'pathToGreen', 'previousMilestone',
-    #           'currentMilestone', 'inputGoals', 'outputGoals'
-    #           ]
 
     template_name = 'formEntry/project_update.html'
 

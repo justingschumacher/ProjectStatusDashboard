@@ -17,12 +17,6 @@ class ProjectUpdateForm(forms.ModelForm):
         'projectCompletionStatus', 'currentMilestone', 'previousMilestone',
         'description', 'risks', 'comments',
     ]
-    # fields = ['goal', 'name', 'projectStatus', 'projectCompletionStatus', 'owner', 'group',
-    #           'startDate', 'dueDate', 'revisedDueDate', 'completionDate', 'didNotMeetDate',
-    #           'createdDate', 'editDate', 'linkToMetrics', 'deck', 'goalType',
-    #           'description', 'comments', 'executiveSummary', 'definition',
-    #           'pathToGreen', 'previousMilestone', 'currentMilestone', 'inputGoals', 'outputGoals'
-    #           ]
 
 
 class ProjectNewForm(forms.Form):
